@@ -118,7 +118,7 @@ if __name__=='__main__':
     ar_int_to_add=ar_int_base[n:n+N]
     ar_int_non_mem=ar_int_base[n+N:n+2*N]
     smt=SparseMerkleTree()
-
+    
     t=time.time()
     mt=MerkleTree(ar_base[:n],h=h)
     dt=time.time()-t
@@ -243,7 +243,7 @@ if __name__=='__main__':
     del imt
     collected = gc.collect()
 
-    
+    """
     t=time.time()
 
     for i in ar_base[:n]:
@@ -301,16 +301,25 @@ if __name__=='__main__':
     d['time verify nonmem SMT:'].append(dt)
     d_o['oper verify nonmem SMT:'].append([(k,v-curr_counter_smt[k]) for k,v in global_counter_smt.items()])
     for k,v in global_counter_smt.items():
-        curr_counter_smt[k]=v
+        curr_counter_smt[k]=v"""
         
     for k,v in d.items():
-        print(N,k,v[0])
+        try:
+            print(N,k,v[0])
+        except:
+            continue
 
     for k,v in d_s.items():
-        print(N,k,v[0])
+        try:
+            print(N,k,v[0])
+        except:
+            continue
 
     for k,v in d_o.items():
-        print(k,v)
+        try:
+            print(k,v)
+        except:
+            continue
 
 
     

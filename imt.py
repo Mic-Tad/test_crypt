@@ -52,7 +52,6 @@ class IndexedMerkleTree:
             self.hash_val_dict[hash_val]=len(self.array)-1
             del self.hash_val_dict[hash_prenull]
             self.hash_val_dict[hash_null]=ind
-            global_counter_imt['hash of 3']+=3
             global_counter_imt['element search and insertions']+=1
             global_counter_imt['comparisons/assigments/appending']+=15
             
@@ -215,11 +214,11 @@ class IndexedMerkleTree:
 
 
 
-def verify_non_membership_proof(hash_null, value, nullifier,  mem_proof,root):
+def verify_non_membership_proof(hash_null, value, nullifier,  mem_proof, root):
     global global_counter_imt
     
     
-    if imt_verify_proof(hash_null, mem_proof,root):
+    if imt_verify_proof(hash_null, mem_proof, root):
 
         global_counter_imt['comparisons/assigments/appending']+=7
         return nullifier[0]<value and (nullifier[2]>value or nullifier[2]==0)
@@ -242,6 +241,8 @@ def imt_verify_proof(target_hash, proof, root):
 if __name__=='__main__':
 
     imt1=IndexedMerkleTree(arr=[5,2,3,],h=4)
+    for k,v in global_counter_imt.items():
+        print(k,v)
     imt1.print_tree(imt1.root)
     a,b,c=7,9,12231
     imt1.add_leaf(a)
@@ -250,6 +251,7 @@ if __name__=='__main__':
     pr1,hash_b=imt1.get_membership_proof(b)
     
     print(imt_verify_proof(hash_b,pr1,imt1.root))
+
     """smt=IndexedMerkleTree(h=4)
     a,b,c=2,1,12231
     smt.add_leaf(a)

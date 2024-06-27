@@ -46,6 +46,7 @@ class SparseMerkleTree:
         
         if int(bin_value[i]):
             if not curr_node.has_right():
+                
                 curr_node.add_right_node(Node())
                 curr_node.add_left_node(Node(self.def_hashes[self.h-i-1]))
                 global_counter_smt['node creation']+=2
@@ -53,6 +54,7 @@ class SparseMerkleTree:
             curr_node=curr_node.right_node
         else:
             if not curr_node.has_left():
+                
                 curr_node.add_left_node(Node())
                 curr_node.add_right_node(Node(self.def_hashes[self.h-i-1]))
                 global_counter_smt['node creation']+=2
@@ -72,6 +74,7 @@ class SparseMerkleTree:
         
         if int(bin_value[i]):
             if not curr_node.has_right():
+                
                 curr_node.add_right_node(Node(self.def_hashes[self.h-i-1]))
                 curr_node.add_left_node(Node(self.def_hashes[self.h-i-1]))
                 global_counter_smt['node creation']+=2
@@ -80,6 +83,7 @@ class SparseMerkleTree:
             curr_node=curr_node.right_node
         else:
             if not curr_node.has_left():
+                
                 curr_node.add_left_node(Node(self.def_hashes[self.h-i-1]))
                 curr_node.add_right_node(Node(self.def_hashes[self.h-i-1]))
                 global_counter_smt['node creation']+=2
@@ -119,8 +123,11 @@ class SparseMerkleTree:
         if i==self.h:
             return
         if not curr_node.has_right() or not curr_node.has_left():
+            
             curr_node.add_right_node(Node(self.def_hashes[self.h-i-1]))
             curr_node.add_left_node(Node(self.def_hashes[self.h-i-1]))
+            global_counter_smt['node creation']+=2
+            global_counter_smt['comparisons/assigments/appending']+=4
         
 
         if int(bin_value[i]):
